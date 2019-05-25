@@ -14,13 +14,13 @@ const maps = require('gulp-sourcemaps');
 function copyHTML() {
     return gulp.src('./*.html')
         .pipe(gulp.dest('/src'))
-        .pipe(gulp.dest('./build'));
+        .pipe(gulp.dest('./dist'));
 }
 
 function img() {
     return gulp.src('./src/img/*')
         .pipe(imagemin())
-        .pipe(gulp.dest('./build/img'));
+        .pipe(gulp.dest('./dist/img'));
 }
 
 
@@ -32,20 +32,20 @@ gulp.task('framework', function (cb) {
         '!./node_modules/bootstrap/dist/css/bootstrap-grid*',
         '!./node_modules/bootstrap/dist/css/bootstrap-reboot*'
     ])
-        .pipe(gulp.dest('./build/framework/bootstrap'))
+        .pipe(gulp.dest('./dist/framework/bootstrap'))
 
     // Font Awesome
     gulp.src([
         './node_modules/@fortawesome/**/*',
     ])
-        .pipe(gulp.dest('./build/framework'))
+        .pipe(gulp.dest('./dist/framework'))
 
     // jQuery
     gulp.src([
         './node_modules/jquery/dist/*',
         '!./node_modules/jquery/dist/core.js'
     ])
-        .pipe(gulp.dest('./build/framework/jquery'))
+        .pipe(gulp.dest('./dist/framework/jquery'))
 
     cb();
 
@@ -67,13 +67,13 @@ function css() {
             browsers: ['last 2 versions'],
             cascade: false
         }))
-        .pipe(gulp.dest("./build/css")) // style.css
+        .pipe(gulp.dest("./dist/css")) // style.css
         .pipe(rename({
             suffix: ".min"
         }))
         .pipe(cleanCSS())
         .pipe(maps.write('./'))
-        .pipe(gulp.dest("./build/css")) // style.min.css
+        .pipe(gulp.dest("./dist/css")) // style.min.css
         .pipe(browsersync.stream());
 }
 
@@ -92,7 +92,7 @@ function js() {
         .pipe(rename({
             suffix: '.min'
         }))
-        .pipe(gulp.dest('./build/js'))
+        .pipe(gulp.dest('./dist/js'))
         .pipe(browsersync.stream());
 }
 
